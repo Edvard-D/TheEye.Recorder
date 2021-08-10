@@ -1,2 +1,2 @@
 TheEye.Recorder.Managers.Recorders = {}
-this = TheEye.Recorder.Managers.Recorders
+local this = TheEye.Recorder.Managers.Recorders
