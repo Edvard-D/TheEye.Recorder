@@ -1,0 +1,47 @@
+# ---------------------------
+# |		  STYLE GUIDE		|
+# ---------------------------
+# Add a space after hashtags.
+#
+# Sections
+#	Signified by a large header.
+#	Name in all caps.
+#	Add 3 lines between sections.
+#
+# Subsections
+#	Signified by a small header.
+#	Add 2 lines between sections.
+#	Order: Types > Dimension Templates > Factories.
+#	Add a line between files in the same section that need to be loaded in the order they appear. 
+#	Alphabetically organize files in the same section that can be loaded in any order.
+
+
+
+# ---------------------------
+# |		   SETTINGS			|
+# ---------------------------
+## Interface: 90002
+## Title: TheEye.Recorder
+## Version: 1.0
+## Dependencies: TheEyeCore
+## Author: Edvard-D
+## X-Website: TheEye.Site
+
+
+
+# ---------------------------
+# |		    INITIAL			|
+# ---------------------------
+Data\Namespaces.lua
+
+
+
+# ---------------------------
+# |	         Data         	|
+# ---------------------------
+
+
+
+# ---------------------------
+# |			FINAL			|
+# ---------------------------
