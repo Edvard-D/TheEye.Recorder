@@ -30,6 +30,13 @@
 
 
 # ---------------------------
+# |	    SAVED VARIABLES		|
+# ---------------------------
+## SavedVariablesPerCharacter: TheEyeRecordedData
+
+
+
+# ---------------------------
 # |		    INITIAL			|
 # ---------------------------
 Data\Namespaces.lua
