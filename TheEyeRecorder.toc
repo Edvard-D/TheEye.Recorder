@@ -59,3 +59,4 @@ Recorders\AbilityUsed.lua
 # ---------------------------
 # |			FINAL			|
 # ---------------------------
+Managers\Initializer.lua
