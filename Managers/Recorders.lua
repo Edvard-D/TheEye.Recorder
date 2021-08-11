@@ -2,6 +2,7 @@ TheEye.Recorder.Managers.Recorders = {}
 local this = TheEye.Recorder.Managers.Recorders
 
 local EventsRegister = TheEye.Core.Managers.Events.Register
+local recordedData = nil
 
 
 function this.Initialize()
@@ -10,6 +11,8 @@ function this.Initialize()
 end
 
 function this:OnEvent(event, ...)
+    recordedData = _G["TheEyeRecordedData"]
+
     for k, recorder in pairs(TheEye.Recorder.Recorders) do
         if recorder.Initialize ~= nil then
             recorder.Initialize()
