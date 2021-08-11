@@ -59,7 +59,7 @@ Managers\Recorders.lua
 # ---------------------------
 # |	      Recorders       	|
 # ---------------------------
-Recorders\AbilityUsed.lua
+Recorders\SpellCastStart.lua
 
 
 
