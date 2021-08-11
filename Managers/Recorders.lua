@@ -2,7 +2,9 @@ TheEye.Recorder.Managers.Recorders = {}
 local this = TheEye.Recorder.Managers.Recorders
 
 local EventsRegister = TheEye.Core.Managers.Events.Register
+local GetTime = GetTime
 local recordedData = nil
+local table = table
 
 
 function this.Initialize()
@@ -18,4 +20,14 @@ function this:OnEvent(event, ...)
             recorder.Initialize()
         end
     end
+end
+
+function this:DataRecord(dataType, data)
+    data.timestamp = GetTime()
+
+    if recordedData[dataType] == nil then
+        recordedData[dataType] = {}
+    end
+
+    table.insert(recordedData[dataType], data)
 end
