@@ -13,6 +13,9 @@ function this.Initialize()
 end
 
 function this:OnEvent(event, ...)
+    if _G["TheEyeRecordedData"] == nil then
+        _G["TheEyeRecordedData"] = {}
+    end
     recordedData = _G["TheEyeRecordedData"]
 
     for k, recorder in pairs(TheEye.Recorder.Recorders) do
