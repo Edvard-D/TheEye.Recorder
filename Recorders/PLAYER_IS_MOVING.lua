@@ -22,6 +22,12 @@ function this.Initialize()
         "Notify"
     )
     this.ListenerGroup:Activate()
+
+    local data =
+    {
+        isMoving = false,
+    }
+    DataRecord(this, data)
 end
 
 function this:Notify(event, ...)
