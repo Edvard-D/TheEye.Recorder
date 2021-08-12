@@ -60,6 +60,7 @@ Managers\Recorders.lua
 # |	      Recorders       	|
 # ---------------------------
 Recorders\PLAYER_EQUIPMENT.lua
+Recorders\PLAYER_HAS_TARGET.lua
 Recorders\PLAYER_IS_MOVING.lua
 Recorders\PLAYER_LEVEL.lua
 Recorders\PLAYER_PVP_TALENT.lua
