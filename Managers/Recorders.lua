@@ -25,7 +25,7 @@ function this:OnEvent(event, ...)
     end
 end
 
-function this:DataRecord(dataType, data)
+function this.DataRecord(dataType, data)
     data.timestamp = GetTime()
 
     if recordedData[dataType] == nil then
