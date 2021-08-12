@@ -59,6 +59,7 @@ Managers\Recorders.lua
 # ---------------------------
 # |	      Recorders       	|
 # ---------------------------
+Recorders\PlayerLevel.lua
 Recorders\PlayerSpellCastStart.lua
 
 
