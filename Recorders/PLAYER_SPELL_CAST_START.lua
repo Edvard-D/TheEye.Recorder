@@ -19,6 +19,6 @@ function this:OnEvent(event, ...)
         {
             spellID = spellID,
         }
-        DataRecord("PLAYER_SPELL_CAST_START", data)
+        DataRecord(this, data)
     end
 end

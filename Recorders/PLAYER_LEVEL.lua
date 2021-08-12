@@ -18,5 +18,5 @@ function this:OnEvent(event, ...)
     {
         level = level,
     }
-    DataRecord("PLAYER_LEVEL", data)
+    DataRecord(this, data)
 end

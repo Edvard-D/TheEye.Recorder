@@ -18,19 +18,21 @@ function this:OnEvent(event, ...)
     end
     recordedData = _G["TheEyeRecordedData"]
 
-    for k, recorder in pairs(TheEye.Recorder.Recorders) do
+    for key, recorder in pairs(TheEye.Recorder.Recorders) do
+        recorder.key = key
+
         if recorder.Initialize ~= nil then
             recorder.Initialize()
         end
     end
 end
 
-function this.DataRecord(dataType, data)
+function this.DataRecord(recorder, data)
     data.timestamp = GetTime()
 
-    if recordedData[dataType] == nil then
-        recordedData[dataType] = {}
+    if recordedData[recorder.key] == nil then
+        recordedData[recorder.key] = {}
     end
 
-    table.insert(recordedData[dataType], data)
+    table.insert(recordedData[recorder.key], data)
 end

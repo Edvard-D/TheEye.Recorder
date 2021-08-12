@@ -31,5 +31,5 @@ function this:Notify(event, ...)
     {
         isMoving = isMoving,
     }
-    DataRecord("PLAYER_IS_MOVING", data)
+    DataRecord(this, data)
 end
