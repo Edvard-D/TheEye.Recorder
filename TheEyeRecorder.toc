@@ -62,6 +62,7 @@ Managers\Recorders.lua
 Recorders\PLAYER_IS_MOVING.lua
 Recorders\PLAYER_LEVEL.lua
 Recorders\PLAYER_SPELL_CAST_START.lua
+Recorders\PLAYER_TALENT.lua
 
 
 
