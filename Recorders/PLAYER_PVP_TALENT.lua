@@ -4,6 +4,7 @@ local this = TheEye.Recorder.Recorders.PLAYER_PVP_TALENT
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
 local EventsRegister = TheEye.Core.Managers.Events.Register
 local GetAllSelectedPvpTalentIDs = C_SpecializationInfo.GetAllSelectedPvpTalentIDs
+local previousTalents = {}
 local table = table
 
 
