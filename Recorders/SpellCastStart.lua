@@ -17,7 +17,6 @@ function this:OnEvent(event, ...)
     if unit == "player" then
         local data =
         {
-            unitGUID = UnitGUID(unit),
             spellID = spellID,
         }
         DataRecord("SpellCastStart", data)
