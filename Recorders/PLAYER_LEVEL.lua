@@ -19,11 +19,9 @@ function this.Initialize()
 end
 
 function this:OnEvent(event, ...)
-    level = select(1, ...)
-
     local data =
     {
-        level = level,
+        level = select(1, ...),
     }
     DataRecord(this, data)
 end
