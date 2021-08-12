@@ -1,5 +1,5 @@
-TheEye.Recorder.Recorders.PlayerIsMoving = {}
-local this = TheEye.Recorder.Recorders.PlayerIsMoving
+TheEye.Recorder.Recorders.PLAYER_IS_MOVING = {}
+local this = TheEye.Recorder.Recorders.PLAYER_IS_MOVING
 
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
 local NotifyBasedFunctionCallerSetup = TheEye.Core.UI.Elements.ListenerGroups.NotifyBasedFunctionCaller.Setup
@@ -31,5 +31,5 @@ function this:Notify(event, ...)
     {
         isMoving = isMoving,
     }
-    DataRecord("PlayerIsMoving", data)
+    DataRecord("PLAYER_IS_MOVING", data)
 end

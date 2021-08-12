@@ -1,5 +1,5 @@
-TheEye.Recorder.Recorders.PlayerSpellCastStart = {}
-local this = TheEye.Recorder.Recorders.PlayerSpellCastStart
+TheEye.Recorder.Recorders.PLAYER_SPELL_CAST_START = {}
+local this = TheEye.Recorder.Recorders.PLAYER_SPELL_CAST_START
 
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
 local EventsRegister = TheEye.Core.Managers.Events.Register
@@ -19,6 +19,6 @@ function this:OnEvent(event, ...)
         {
             spellID = spellID,
         }
-        DataRecord("PlayerSpellCastStart", data)
+        DataRecord("PLAYER_SPELL_CAST_START", data)
     end
 end

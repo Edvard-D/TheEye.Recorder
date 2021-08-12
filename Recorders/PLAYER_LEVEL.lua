@@ -1,5 +1,5 @@
-TheEye.Recorder.Recorders.PlayerLevel = {}
-local this = TheEye.Recorder.Recorders.PlayerLevel
+TheEye.Recorder.Recorders.PLAYER_LEVEL = {}
+local this = TheEye.Recorder.Recorders.PLAYER_LEVEL
 
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
 local EventsRegister = TheEye.Core.Managers.Events.Register
@@ -18,5 +18,5 @@ function this:OnEvent(event, ...)
     {
         level = level,
     }
-    DataRecord("PlayerLevel", data)
+    DataRecord("PLAYER_LEVEL", data)
 end
