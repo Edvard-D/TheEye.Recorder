@@ -13,8 +13,8 @@ local talentRows = 7
 local function DataRecordIfNecessary()
     local currentTalents = {}
     
-    for row = 1, TheEye.Analyzer.Data.talentRows do
-        for column = 1, TheEye.Analyzer.Data.talentColumns do
+    for row = 1, talentRows do
+        for column = 1, talentColumns do
             local talentID, _, _, isSelected = GetTalentInfo(row, column, 1)
             
             if isSelected == true then
