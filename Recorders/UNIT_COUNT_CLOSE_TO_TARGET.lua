@@ -37,11 +37,6 @@ function this:Notify(event, unitCount, inputGroup)
     else
         hostility = "FRIENDLY"
     end
-
-    local data =
-    {
-        hostility = hostility,
-        unitCount = unitCount,
-    }
-    DataRecord(this, data)
+    
+    DataRecord(this, hostility .. "_" .. unitCount)
 end

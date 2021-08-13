@@ -30,10 +30,6 @@ function this.Initialize()
     DataRecord(this, data)
 end
 
-function this:Notify(event, isMoving)    
-    local data =
-    {
-        isMoving = isMoving,
-    }
-    DataRecord(this, data)
+function this:Notify(event, isMoving)
+    DataRecord(this, isMoving)
 end

@@ -14,17 +14,11 @@ function this.Initialize()
     }
     EventsRegister(this)
 
-    local data =
-    {
-        isInCombat = UnitAffectingCombat("player"),
-    }
-    DataRecord(this, data)
+    local isInCombat = UnitAffectingCombat("player")
+    DataRecord(this, isInCombat)
 end
 
 function this:OnEvent(event, ...)
-    local data =
-    {
-        isInCombat = event == "PLAYER_REGEN_DISABLED",
-    }
-    DataRecord(this, data)
+    local isInCombat = event == "PLAYER_REGEN_DISABLED"
+    DataRecord(this, isInCombat)
 end

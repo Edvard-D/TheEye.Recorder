@@ -20,8 +20,7 @@ local function DataRecordIfNecessary()
     end
 
     if table.areidentical(currentArmor, previousArmor) == false then
-        local data = { itemIDs = currentArmor }
-        DataRecord(this, data)
+        DataRecord(this, currentArmor)
         previousArmor = currentArmor
     end
 end

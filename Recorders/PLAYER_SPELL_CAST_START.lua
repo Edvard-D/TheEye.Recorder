@@ -15,10 +15,6 @@ function this:OnEvent(event, ...)
     unit, _, spellID = ...
 
     if unit == "player" then
-        local data =
-        {
-            spellID = spellID,
-        }
-        DataRecord(this, data)
+        DataRecord(this, spellID)
     end
 end

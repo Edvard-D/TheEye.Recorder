@@ -27,12 +27,11 @@ function this:OnEvent(event, ...)
     end
 end
 
+-- Expects data to be a numerical, boolean, or string value.
 function this.DataRecord(recorder, data)
-    data.timestamp = GetTime()
-
     if recordedData[recorder.key] == nil then
         recordedData[recorder.key] = {}
     end
 
-    table.insert(recordedData[recorder.key], data)
+    table.insert(recordedData[recorder.key], { timestamp = GetTime(), data = data})
 end

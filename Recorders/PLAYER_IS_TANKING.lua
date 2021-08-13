@@ -32,10 +32,7 @@ end
 
 function this:Notify(event, ...)
     local threatSituation = select(1, ...)
-    
-    local data =
-    {
-        isTanking = threatSituation >= 2,
-    }
-    DataRecord(this, data)
+    local isTanking = threatSituation >= 2
+
+    DataRecord(this, isTanking)
 end

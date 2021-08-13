@@ -11,17 +11,10 @@ function this.Initialize()
     this.gameEvents = { "PLAYER_LEVEL_UP" }
     EventsRegister(this)
 
-    local data =
-    {
-        level = UnitLevel("player"),
-    }
-    DataRecord(this, data)
+    DataRecord(this, UnitLevel("player"))
 end
 
 function this:OnEvent(event, ...)
-    local data =
-    {
-        level = select(1, ...),
-    }
-    DataRecord(this, data)
+    local level = select(1, ...)
+    DataRecord(this, level)
 end

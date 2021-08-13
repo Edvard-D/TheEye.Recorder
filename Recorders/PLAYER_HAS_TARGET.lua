@@ -19,10 +19,5 @@ end
 
 function this:OnEvent(event, ...)
     local hasTarget = UnitGUID("target") ~= nil
-
-    local data =
-    {
-        hasTarget = hasTarget,
-    }
-    DataRecord(this, data)
+    DataRecord(this, hasTarget)
 end

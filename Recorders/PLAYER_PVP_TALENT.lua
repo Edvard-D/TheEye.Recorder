@@ -12,8 +12,7 @@ local function DataRecordIfNecessary()
     local currentTalents = GetAllSelectedPvpTalentIDs()
 
     if table.areidentical(currentTalents, previousTalents) == false then
-        local data = { talentIDs = currentTalents }
-        DataRecord(this, data)
+        DataRecord(this, currentTalents)
         previousTalents = currentTalents
     end
 end

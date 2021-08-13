@@ -31,9 +31,5 @@ function this.Initialize()
 end
 
 function this:Notify(event, isHostile)
-    local data =
-    {
-        isHostile = isHostile,
-    }
-    DataRecord(this, data)
+    DataRecord(this, isHostile)
 end

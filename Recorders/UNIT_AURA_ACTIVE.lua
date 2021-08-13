@@ -21,18 +21,13 @@ local function DataRecordIfNecessary(unit)
         local sourceUnit = aura[7]
         local spellID = aura[10]
 
-        table.insert(currentAuras, spellID .. "_" .. UnitCategoryGet(sourceUnit))
+        table.insert(currentAuras, unit .. "_" .. spellID .. "_" .. UnitCategoryGet(sourceUnit))
     end
 
     table.sort(currentAuras)
 
     if table.areidentical(currentAuras, previousAuras[unit]) == false then
-        local data =
-        {
-            unit = unit,
-            auras = currentAuras,
-        }
-        DataRecord(this, data)
+        DataRecord(this, currentAuras)
         previousAuras[unit] = currentAuras
     end
 end

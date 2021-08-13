@@ -2,6 +2,7 @@ TheEye.Recorder.Recorders.UNIT_HEALTH_PERCENT = {}
 local this = TheEye.Recorder.Recorders.UNIT_HEALTH_PERCENT
 
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
+local math = math
 local NotifyBasedFunctionCallerSetup = TheEye.Core.UI.Elements.ListenerGroups.NotifyBasedFunctionCaller.Setup
 
 
@@ -30,11 +31,6 @@ end
 
 function this:Notify(event, healthPercent, inputGroup)
     local unit = inputGroup.inputValues[1]
-
-    local data =
-    {
-        unit = unit,
-        healthPercent = healthPercent,
-    }
-    DataRecord(this, data)
+    healthPercent = math.floor(healthPercent + 0.5)
+    DataRecord(this, unit .. "_" .. healthPercent)
 end
