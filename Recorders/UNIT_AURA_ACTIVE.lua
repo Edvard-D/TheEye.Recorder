@@ -9,11 +9,21 @@ local previousAuras =
     player = {},
     target = {},
 }
-local UnitAuraSpellIDsGet = TheEye.Core.Helpers.Auras.UnitAuraSpellIDsGet
+local UnitAurasGet = TheEye.Core.Helpers.Auras.UnitAurasGet
 
 
 local function DataRecordIfNecessary(unit)
-    local currentAuras = UnitAuraSpellIDsGet(unit, nil)
+    local auras = UnitAurasGet(unit, nil)
+    local currentAuras = {}
+
+    for i = 1, #auras do
+        local aura = auras[i]
+        local sourceUnit = aura[7]
+        local spellID = aura[10]
+
+        table.insert(currentAuras, spellID .. "_" .. UnitCategoryGet(sourceUnit))
+    end
+
     table.sort(currentAuras)
 
     if table.areidentical(currentAuras, previousAuras[unit]) == false then
