@@ -32,35 +32,35 @@ function this.Initialize()
         Listeners =
         {
             {
-                evaluatorKey = "COMBAT_LOG",
+                eventEvaluatorKey = "COMBAT_LOG",
                 inputValues = { --[[eventName]] "SPELL_AURA_APPLIED", --[[sourceUnit]] "player", --[[destUnit]] "_" },
             },
             {
-                evaluatorKey = "COMBAT_LOG",
+                eventEvaluatorKey = "COMBAT_LOG",
                 inputValues = { --[[eventName]] "SPELL_AURA_BROKEN", --[[sourceUnit]] "player", --[[destUnit]] "_" },
             },
             {
-                evaluatorKey = "COMBAT_LOG",
+                eventEvaluatorKey = "COMBAT_LOG",
                 inputValues = { --[[eventName]] "SPELL_AURA_BROKEN_SPELL", --[[sourceUnit]] "player", --[[destUnit]] "_" },
             },
             {
-                evaluatorKey = "COMBAT_LOG",
+                eventEvaluatorKey = "COMBAT_LOG",
                 inputValues = { --[[eventName]] "SPELL_AURA_REMOVED", --[[sourceUnit]] "player", --[[destUnit]] "_" },
             },
             {
-                evaluatorKey = "COMBAT_LOG",
+                eventEvaluatorKey = "COMBAT_LOG",
                 inputValues = { --[[eventName]] "SPELL_AURA_APPLIED", --[[sourceUnit]] "_", --[[destUnit]] "target" },
             },
             {
-                evaluatorKey = "COMBAT_LOG",
+                eventEvaluatorKey = "COMBAT_LOG",
                 inputValues = { --[[eventName]] "SPELL_AURA_BROKEN", --[[sourceUnit]] "_", --[[destUnit]] "target" },
             },
             {
-                evaluatorKey = "COMBAT_LOG",
+                eventEvaluatorKey = "COMBAT_LOG",
                 inputValues = { --[[eventName]] "SPELL_AURA_BROKEN_SPELL", --[[sourceUnit]] "_", --[[destUnit]] "target" },
             },
             {
-                evaluatorKey = "COMBAT_LOG",
+                eventEvaluatorKey = "COMBAT_LOG",
                 inputValues = { --[[eventName]] "SPELL_AURA_REMOVED", --[[sourceUnit]] "_", --[[destUnit]] "target" },
             },
         },
