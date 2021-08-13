@@ -2,6 +2,7 @@ TheEye.Recorder.Recorders.UNIT_AURA_ACTIVE = {}
 local this = TheEye.Recorder.Recorders.UNIT_AURA_ACTIVE
 
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
+local EventsRegister = TheEye.Core.Managers.Events.Register
 local NotifyBasedFunctionCallerSetup = TheEye.Core.UI.Elements.ListenerGroups.NotifyBasedFunctionCaller.Setup
 local previousAuras =
 {
@@ -72,7 +73,17 @@ function this.Initialize()
     )
     this.ListenerGroup:Activate()
 
+    this.gameEvents = 
+    {
+        "PLAYER_TARGET_CHANGED",
+    }
+    EventsRegister(this)
+
     DataRecordIfNecessary("player")
+    DataRecordIfNecessary("target")
+end
+
+function this:OnEvent(event) -- PLAYER_TARGET_CHANGED
     DataRecordIfNecessary("target")
 end
 
