@@ -76,7 +76,7 @@ function this.Initialize()
     DataRecordIfNecessary("target")
 end
 
-function this:Notify(event, inputGroup)
+function this:Notify(event, _, inputGroup)
     local sourceUnit = inputGroup.inputValues[2]
     local destUnit = inputGroup.inputValues[3]
 
