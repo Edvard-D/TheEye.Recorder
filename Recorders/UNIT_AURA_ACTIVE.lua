@@ -30,7 +30,7 @@ local function DataRecordIfNecessary(unit)
         local data =
         {
             unit = unit,
-            spellIDs = currentAuras,
+            auras = currentAuras,
         }
         DataRecord(this, data)
         previousAuras[unit] = currentAuras
