@@ -13,10 +13,10 @@ function this.Initialize()
 end
 
 function this:OnEvent(event, ...)
-    if _G["TheEyeRecordedData"] == nil then
-        _G["TheEyeRecordedData"] = {}
-    end
+    -- Previously saved data is intentionally overwritten every time the UI is reloaded
+    _G["TheEyeRecordedData"] = {}
     recordedData = _G["TheEyeRecordedData"]
+    collectgarbage()
 
     for key, recorder in pairs(TheEye.Recorder.Recorders) do
         recorder.key = key
