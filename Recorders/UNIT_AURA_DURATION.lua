@@ -1,2 +1,121 @@
 TheEye.Recorder.Recorders.UNIT_AURA_DURATION = {}
 local this = TheEye.Recorder.Recorders.UNIT_AURA_DURATION
+
+local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
+local EventsRegister = TheEye.Core.Managers.Events.Register
+local GetTime = GetTime
+local lastUpdateTimestamp = 0
+local NotifyBasedFunctionCallerSetup = TheEye.Core.UI.Elements.ListenerGroups.NotifyBasedFunctionCaller.Setup
+local previousAuras =
+{
+    player = {},
+    target = {},
+}
+local UnitAurasGet = TheEye.Core.Helpers.Auras.UnitAurasGet
+local UnitCategoryGet = TheEye.Core.Helpers.Unit.UnitCategoryGet
+local updateRate = 1 -- second
+
+
+local function DataRecordIfNecessary(unit)
+    local auras = UnitAurasGet(unit, nil)
+    local currentAuras = {}
+
+    for i = 1, #auras do
+        local aura = auras[i]
+        local count = aura[3]
+        local expirationTime = aura[6]
+        local sourceUnit = aura[7]
+        local spellID = aura[10]
+        local remainingDuration = expirationTime - GetTime()
+
+        if count > 0 then
+            table.insert(currentAuras, unit .. "_" .. spellID .. "_" .. remainingDuration .. "_" .. UnitCategoryGet(sourceUnit))
+        end
+    end
+
+    table.sort(currentAuras)
+
+    if table.areidentical(currentAuras, previousAuras[unit]) == false then
+        DataRecord(this, currentAuras)
+        previousAuras[unit] = currentAuras
+    end
+end
+
+function this.Initialize()
+    this.ListenerGroup =
+    {
+        Listeners =
+        {
+            {
+                eventEvaluatorKey = "COMBAT_LOG",
+                inputValues = { --[[eventName]] "SPELL_AURA_APPLIED", --[[sourceUnit]] "player", --[[destUnit]] "_" },
+            },
+            {
+                eventEvaluatorKey = "COMBAT_LOG",
+                inputValues = { --[[eventName]] "SPELL_AURA_BROKEN", --[[sourceUnit]] "player", --[[destUnit]] "_" },
+            },
+            {
+                eventEvaluatorKey = "COMBAT_LOG",
+                inputValues = { --[[eventName]] "SPELL_AURA_BROKEN_SPELL", --[[sourceUnit]] "player", --[[destUnit]] "_" },
+            },
+            {
+                eventEvaluatorKey = "COMBAT_LOG",
+                inputValues = { --[[eventName]] "SPELL_AURA_REMOVED", --[[sourceUnit]] "player", --[[destUnit]] "_" },
+            },
+            {
+                eventEvaluatorKey = "COMBAT_LOG",
+                inputValues = { --[[eventName]] "SPELL_AURA_APPLIED", --[[sourceUnit]] "_", --[[destUnit]] "target" },
+            },
+            {
+                eventEvaluatorKey = "COMBAT_LOG",
+                inputValues = { --[[eventName]] "SPELL_AURA_BROKEN", --[[sourceUnit]] "_", --[[destUnit]] "target" },
+            },
+            {
+                eventEvaluatorKey = "COMBAT_LOG",
+                inputValues = { --[[eventName]] "SPELL_AURA_BROKEN_SPELL", --[[sourceUnit]] "_", --[[destUnit]] "target" },
+            },
+            {
+                eventEvaluatorKey = "COMBAT_LOG",
+                inputValues = { --[[eventName]] "SPELL_AURA_REMOVED", --[[sourceUnit]] "_", --[[destUnit]] "target" },
+            },
+        },
+    }
+    NotifyBasedFunctionCallerSetup(
+        this.ListenerGroup,
+        this,
+        "Notify"
+    )
+    this.ListenerGroup:Activate()
+
+    this.customEvents = { "UPDATE" }
+    this.gameEvents = { "PLAYER_TARGET_CHANGED" }
+    EventsRegister(this)
+
+    DataRecordIfNecessary("player")
+    DataRecordIfNecessary("target")
+end
+
+function this:OnEvent(event)
+    if event == "UPDATE" then
+        local currentTime = GetTime()
+        
+        if currentTime - lastUpdateTimestamp > updateRate then
+            lastUpdateTimestamp =  currentTime
+            DataRecordIfNecessary("player")
+            DataRecordIfNecessary("target")
+        end
+    else -- PLAYER_TARGET_CHANGED
+        DataRecordIfNecessary("target")
+    end
+end
+
+function this:Notify(event, _, inputGroup)
+    local sourceUnit = inputGroup.inputValues[2]
+    local destUnit = inputGroup.inputValues[3]
+
+    if sourceUnit == "_" then
+        DataRecordIfNecessary(destUnit)
+    else
+        DataRecordIfNecessary(sourceUnit)
+    end
+end
