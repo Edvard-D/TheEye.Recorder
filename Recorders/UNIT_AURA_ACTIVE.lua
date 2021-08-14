@@ -10,6 +10,7 @@ local previousAuras =
     target = {},
 }
 local UnitAurasGet = TheEye.Core.Helpers.Auras.UnitAurasGet
+local UnitCategoryGet = TheEye.Core.Helpers.Unit.UnitCategoryGet
 
 
 local function DataRecordIfNecessary(unit)
