@@ -33,5 +33,10 @@ function this.DataRecord(recorder, data)
         recordedData[recorder.key] = {}
     end
 
-    table.insert(recordedData[recorder.key], { timestamp = GetTime(), data = data})
+    local dataTable = { timestamp = GetTime() }
+    if data ~= nil then
+        dataTable.data = data
+    end
+
+    table.insert(recordedData[recorder.key], dataTable)
 end
