@@ -5,6 +5,7 @@ local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
 local healthChangeRecordUnit = 5 -- percent
 local math = math
 local NotifyBasedFunctionCallerSetup = TheEye.Core.UI.Elements.ListenerGroups.NotifyBasedFunctionCaller.Setup
+local previousHealthPercent = { player = math.huge, target = math.huge }
 
 
 function this.Initialize()
@@ -33,5 +34,9 @@ end
 function this:Notify(event, healthPercent, inputGroup)
     local unit = inputGroup.inputValues[1]
     healthPercent = (math.ceil((healthPercent * 100) / healthChangeRecordUnit) * healthChangeRecordUnit) / 100
-    DataRecord(this, unit .. "_" .. healthPercent)
+
+    if healthPercent ~= previousHealthPercent[unit] then
+        previousHealthPercent[unit] = healthPercent
+        DataRecord(this, unit .. "_" .. healthPercent)
+    end
 end
