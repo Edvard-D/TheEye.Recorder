@@ -57,6 +57,13 @@ Managers\Recorders.lua
 
 
 # ---------------------------
+# |	        Helpers        	|
+# ---------------------------
+Helpers\Auras.lua
+
+
+
+# ---------------------------
 # |	      Recorders       	|
 # ---------------------------
 Recorders\PLAYER_EQUIPMENT.lua

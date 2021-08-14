@@ -4,6 +4,7 @@ TheEye = TheEye or {}
 
 TheEye.Recorder =
 {
+    Helpers = {},
     Managers = {},
     Recorders = {},
 }
