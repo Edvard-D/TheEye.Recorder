@@ -70,6 +70,7 @@ Recorders\PLAYER_SPELL_CAST_START.lua
 Recorders\PLAYER_TALENT.lua
 Recorders\TARGET_IS_HOSTILE.lua
 Recorders\UNIT_AURA_ACTIVE.lua
+Recorders\UNIT_AURA_DURATION.lua
 Recorders\UNIT_AURA_STACKS.lua
 Recorders\UNIT_COUNT_CLOSE_TO_TARGET.lua
 Recorders\UNIT_HEALTH_PERCENT.lua
