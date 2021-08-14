@@ -65,6 +65,7 @@ Recorders\PLAYER_INSTANCE.lua
 Recorders\PLAYER_IS_IN_COMBAT.lua
 Recorders\PLAYER_IS_MOVING.lua
 Recorders\PLAYER_IS_TANKING.lua
+Recorders\PLAYER_JUMPED.lua
 Recorders\PLAYER_LEVEL.lua
 Recorders\PLAYER_PVP_TALENT.lua
 Recorders\PLAYER_SPELL_CAST_START.lua
