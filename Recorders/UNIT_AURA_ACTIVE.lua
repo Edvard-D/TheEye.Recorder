@@ -79,10 +79,7 @@ function this.Initialize()
     )
     this.ListenerGroup:Activate()
 
-    this.gameEvents = 
-    {
-        "PLAYER_TARGET_CHANGED",
-    }
+    this.gameEvents = { "PLAYER_TARGET_CHANGED" }
     EventsRegister(this)
 
     DataRecordIfNecessary("player")
