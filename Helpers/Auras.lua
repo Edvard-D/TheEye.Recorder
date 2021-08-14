@@ -1,7 +1,6 @@
 TheEye.Recorder.Helpers.Auras = {}
 local this = TheEye.Recorder.Helpers.Auras
 
-local UnitCategoryGet = TheEye.Core.Helpers.Unit.UnitCategoryGet
 local UnitIsEnemy = UnitIsEnemy
 local UnitIsPlayer = UnitIsPlayer
 
