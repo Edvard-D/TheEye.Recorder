@@ -23,11 +23,7 @@ function this.Initialize()
     )
     this.ListenerGroup:Activate()
 
-    local data =
-    {
-        isMoving = false,
-    }
-    DataRecord(this, data)
+    DataRecord(this, false)
 end
 
 function this:Notify(event, isMoving)

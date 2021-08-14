@@ -10,11 +10,7 @@ function this.Initialize()
     this.gameEvents = { "PLAYER_TARGET_CHANGED" }
     EventsRegister(this)
 
-    local data =
-    {
-        hasTarget = false,
-    }
-    DataRecord(this, data)
+    DataRecord(this, false)
 end
 
 function this:OnEvent(event, ...)

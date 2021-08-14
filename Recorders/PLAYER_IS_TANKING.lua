@@ -23,11 +23,7 @@ function this.Initialize()
     )
     this.ListenerGroup:Activate()
 
-    local data =
-    {
-        isTanking = false,
-    }
-    DataRecord(this, data)
+    DataRecord(this, false)
 end
 
 function this:Notify(event, ...)
