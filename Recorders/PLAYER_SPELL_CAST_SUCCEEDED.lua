@@ -3,6 +3,8 @@ local this = TheEye.Recorder.Recorders.PLAYER_SPELL_CAST_SUCCEEDED
 
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
 local EventsRegister = TheEye.Core.Managers.Events.Register
+local lastRecordTimestamp
+local lastSpellID
 
 
 function this.Initialize()
@@ -13,7 +15,9 @@ end
 function this:OnEvent(event, ...)
     local unit, _, spellID = ...
 
-    if unit == "player" then
+    if unit == "player" and (lastSpellID ~= spellID or lastRecordTimestamp ~= GetTime()) then
         DataRecord(this, spellID)
+        lastRecordTimestamp = GetTime()
+        lastSpellID = spellID
     end
 end
