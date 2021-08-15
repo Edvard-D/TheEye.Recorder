@@ -1,5 +1,5 @@
-TheEye.Recorder.Recorders.UNIT_AURA_STACKS = {}
-local this = TheEye.Recorder.Recorders.UNIT_AURA_STACKS
+TheEye.Recorder.Recorders.UNIT_AURA_STACK_COUNT = {}
+local this = TheEye.Recorder.Recorders.UNIT_AURA_STACK_COUNT
 
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
 local EventsRegister = TheEye.Core.Managers.Events.Register
@@ -19,12 +19,12 @@ local function DataRecordIfNecessary(unit)
 
     for i = 1, #auras do
         local aura = auras[i]
-        local count = aura[3]
+        local stackCount = aura[3]
         local sourceUnit = aura[7]
         local spellID = aura[10]
 
-        if count > 0 then
-            table.insert(currentAuras, unit .. "_" .. spellID .. "_" .. count .. "_" .. UnitCategoryGet(sourceUnit))
+        if stackCount > 0 then
+            table.insert(currentAuras, unit .. "_" .. spellID .. "_" .. stackCount .. "_" .. UnitCategoryGet(sourceUnit))
         end
     end
 
