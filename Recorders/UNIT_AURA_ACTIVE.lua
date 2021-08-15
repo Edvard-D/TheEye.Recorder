@@ -3,33 +3,49 @@ local this = TheEye.Recorder.Recorders.UNIT_AURA_ACTIVE
 
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
 local EventsRegister = TheEye.Core.Managers.Events.Register
+local IsAuraValidForRecord = TheEye.Recorder.Helpers.Auras.IsAuraValidForRecord
 local NotifyBasedFunctionCallerSetup = TheEye.Core.UI.Elements.ListenerGroups.NotifyBasedFunctionCaller.Setup
 local previousAuras =
 {
     player = {},
     target = {},
 }
+local tostring = tostring
 local UnitAurasGet = TheEye.Core.Helpers.Auras.UnitAurasGet
 local UnitCategoryGet = TheEye.Core.Helpers.Unit.UnitCategoryGet
 
 
-local function DataRecordIfNecessary(unit)
+local function DataRecordFormatAsString(unit, spellID, isActive, sourceUnitCategory)
+    return unit .. "_" .. spellID .. "_" .. tostring(isActive) .. "_" .. sourceUnitCategory
+end
+
+local function DataRecordIfNecessary(destUnit)
     local auras = UnitAurasGet(unit, nil)
     local currentAuras = {}
 
     for i = 1, #auras do
         local aura = auras[i]
+        local stackCount = aura[3]
+        local expirationTime = aura[6]
         local sourceUnit = aura[7]
-        local spellID = aura[10]
+        local sourceUnitCategory = UnitCategoryGet(sourceUnit)
 
-        table.insert(currentAuras, unit .. "_" .. spellID .. "_" .. UnitCategoryGet(sourceUnit))
-    end
+        -- This recorder is only meant to record auras that don't have a duration or a stack count, as those
+        -- will be handled by UNIT_AURA_DURATION and UNIT_AURA_STACK_COUNT respectively.
+        if expirationTime == 0 and stackCount == 0 and IsAuraValidForRecord(sourceUnit, destUnit, sourceUnitCategory) == true then
+            local spellID = aura[10]
+            local unitPreviousAuras = previousAuras[destUnit]
+            local dataString = DataRecordFormatAsString(destUnit, spellID, true, sourceUnitCategory)
 
-    table.sort(currentAuras)
-
-    if table.areidentical(currentAuras, previousAuras[unit]) == false then
-        DataRecord(this, currentAuras)
-        previousAuras[unit] = currentAuras
+            if unitPreviousAuras[spellID] == nil or unitPreviousAuras[spellID].dataString ~= dataString then
+                DataRecord(this, dataString)
+                unitPreviousAuras[spellID] =
+                {
+                    dataString = dataString,
+                    sourceUnitCategory = sourceUnitCategory
+                }
+            end
+        end
     end
 end
 
@@ -91,12 +107,24 @@ function this:OnEvent(event) -- PLAYER_TARGET_CHANGED
 end
 
 function this:Notify(event, _, inputGroup)
-    local sourceUnit = inputGroup.inputValues[2]
-    local destUnit = inputGroup.inputValues[3]
+    local eventData = inputGroup.eventData
+    local destUnit = eventData.destUnit
 
-    if sourceUnit == "_" then
+    if destUnit ~= "player" and destUnit ~= "target" then
+        return
+    end
+    
+    if event == "SPELL_AURA_APPLIED" then
         DataRecordIfNecessary(destUnit)
-    else
-        DataRecordIfNecessary(sourceUnit)
+    else -- SPELL_AURA_BROKEN, SPELL_AURA_BROKEN_SPELL, SPELL_AURA_REMOVED
+        local unitPreviousAuras = previousAuras[destUnit]
+        local spellID = eventData.spellID
+
+        if unitPreviousAuras[spellID] ~= nil then
+            local dataString = DataRecordFormatAsString(destUnit, spellID, false, unitPreviousAuras[spellID].sourceUnitCategory)
+
+            DataRecord(this, dataString)
+            unitPreviousAuras[spellID].dataString = dataString
+        end
     end
 end

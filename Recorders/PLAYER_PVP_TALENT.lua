@@ -11,10 +11,23 @@ local table = table
 local function DataRecordIfNecessary()
     local currentTalents = GetAllSelectedPvpTalentIDs()
 
-    if table.areidentical(currentTalents, previousTalents) == false then
-        DataRecord(this, currentTalents)
-        previousTalents = currentTalents
+    for i = 1, #currentTalents do
+        local talentID = currentTalents[i]
+
+        if table.hasvalue(previousTalents, talentID) == false then
+            DataRecord(this, talentID .. "_" .. tostring(true))
+        end
     end
+
+    for i = 1, #previousTalents do
+        local talentID = previousTalents[i]
+
+        if table.hasvalue(currentTalents, talentID) == false then
+            DataRecord(this, talentID .. "_" .. tostring(false))
+        end
+    end
+
+    previousTalents = currentTalents
 end
 
 function this.Initialize()

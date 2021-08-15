@@ -6,6 +6,7 @@ local EventsRegister = TheEye.Core.Managers.Events.Register
 local GetInventoryItemID = GetInventoryItemID
 local previousArmor = {}
 local table = table
+local tostring = tostring
 
 
 local function DataRecordIfNecessary()
@@ -13,15 +14,19 @@ local function DataRecordIfNecessary()
     
     for i = 1, 19 do
         local itemID = GetInventoryItemID("player", i)
+        local previousItemID = previousArmor[i]
 
-        if itemID ~= nil then
-            table.insert(currentArmor, itemID)
+        if itemID ~= previousItemID then
+            if previousItemID ~= nil then
+                DataRecord(this, previousItemID .. "_" .. tostring(false))
+            end
+
+            if itemID ~= nil then
+                DataRecord(this, itemID .. "_" .. tostring(true))
+            end
+
+            previousArmor[i] = itemID
         end
-    end
-
-    if table.areidentical(currentArmor, previousArmor) == false then
-        DataRecord(this, currentArmor)
-        previousArmor = currentArmor
     end
 end
 

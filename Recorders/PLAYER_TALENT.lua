@@ -17,15 +17,11 @@ local function DataRecordIfNecessary()
         for column = 1, talentColumns do
             local talentID, _, _, isSelected = GetTalentInfo(row, column, 1)
             
-            if isSelected == true then
-                table.insert(currentTalents, talentID)
+            if previousTalents[talentID] ~= isSelected and (isSelected == true or previousTalents[talentID] ~= nil) then
+                DataRecord(this, talentID .. "_" .. tostring(isSelected))
+                previousTalents[talentID] = isSelected
             end
         end
-    end
-
-    if table.areidentical(currentTalents, previousTalents) == false then
-        DataRecord(this, currentTalents)
-        previousTalents = currentTalents
     end
 end
 
