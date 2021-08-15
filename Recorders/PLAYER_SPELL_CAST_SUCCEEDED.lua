@@ -11,7 +11,7 @@ function this.Initialize()
 end
 
 function this:OnEvent(event, ...)
-    unit, _, spellID = ...
+    local unit, _, spellID = ...
 
     if unit == "player" then
         DataRecord(this, spellID)
