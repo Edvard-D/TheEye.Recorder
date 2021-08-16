@@ -5,7 +5,7 @@ local UnitIsEnemy = UnitIsEnemy
 local UnitIsPlayer = UnitIsPlayer
 
 
-function this.AreSourceAndDestUnitValidForRecord(sourceUnit, destUnit, sourceUnitCategory)
+function this.IsAuraValidForRecord(sourceUnit, destUnit, sourceUnitCategory)
     local destUnitIsFriendlyPlayer = false
     if destUnit ~= nil then
         destUnitIsFriendlyPlayer = UnitIsEnemy(destUnit) == false and UnitIsPlayer(destUnit) == true
