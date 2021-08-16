@@ -8,14 +8,6 @@ local select = select
 
 
 function this.Initialize()
-    this.gameEvents = { "PLAYER_ENTERING_WORLD" }
-    EventsRegister(this)
-
-    local instanceID = select(8, GetInstanceInfo())
-    DataRecord(this, instanceID)
-end
-
-function this:OnEvent(event, ...)
     local instanceID = select(8, GetInstanceInfo())
     DataRecord(this, instanceID)
 end
