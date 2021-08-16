@@ -18,13 +18,19 @@ local UnitHealth = UnitHealth
 
 
 local function DataRecordIfNecessary()
-    if targetHealthChangePerSecond >= 0 then
+    local targetHealth = UnitHealth("target")
+
+    if targetHealth == 0 then
+        DataRecord(this, 0)
+        previousTargetTimeUntilDeath = 0
+        return
+    elseif targetHealthChangePerSecond >= 0 then
         DataRecord(this, "INF")
         previousTargetTimeUntilDeath = "INF"
         return
     end
 
-    local targetTimeUntilDeath = UnitHealth("target") / (targetHealthChangePerSecond * -1)
+    local targetTimeUntilDeath = targetHealth / (targetHealthChangePerSecond * -1)
     targetTimeUntilDeath = DurationCalculateForDataKey(targetTimeUntilDeath, thresholds, recordUnits)
 
     if targetTimeUntilDeath ~= previousTargetTimeUntilDeath
@@ -53,6 +59,11 @@ function this:OnEvent(event, ...)
 
         local unitGUID = UnitGUID("target")
         if unitGUID == nil then
+            if previousTargetTimeUntilDeath ~= 0 then
+                DataRecord(this, 0)
+                previousTargetTimeUntilDeath = 0
+            end
+
             return
         end
         
