@@ -15,13 +15,12 @@ local UnitAurasGet = TheEye.Core.Helpers.Auras.UnitAurasGet
 local UnitCategoryGet = TheEye.Core.Helpers.Unit.UnitCategoryGet
 
 
-local function DataRecordFormatAsString(unit, spellID, isActive, sourceUnitCategory)
-    return unit .. "_" .. spellID .. "_" .. tostring(isActive) .. "_" .. sourceUnitCategory
+local function DataRecordFormatAsString(destUnit, spellID, isActive, sourceUnitCategory)
+    return destUnit .. "_" .. spellID .. "_" .. tostring(isActive) .. "_" .. sourceUnitCategory
 end
 
-local function DataRecordIfNecessary(destUnit)
-    local auras = UnitAurasGet(destUnit, nil)
-    local currentAuras = {}
+local function AurasProcess(destUnit, flag)
+    local auras = UnitAurasGet(destUnit, flag)
 
     for i = 1, #auras do
         local aura = auras[i]
@@ -47,6 +46,11 @@ local function DataRecordIfNecessary(destUnit)
             end
         end
     end
+end
+
+local function DataRecordIfNecessary(destUnit)
+    AurasProcess(destUnit, "HELPFUL")
+    AurasProcess(destUnit, "HARMFUL")
 end
 
 function this.Initialize()

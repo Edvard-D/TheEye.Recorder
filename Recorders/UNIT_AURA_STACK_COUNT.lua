@@ -18,9 +18,8 @@ local function DataRecordFormatAsString(destUnit, spellID, stackCount, sourceUni
     return destUnit .. "_" .. spellID .. "_" .. stackCount .. "_" .. sourceUnitCategory
 end
 
-local function DataRecordIfNecessary(destUnit)
-    local auras = UnitAurasGet(destUnit, nil)
-    local currentAuras = {}
+local function AurasProcess(destUnit, flag)
+    local auras = UnitAurasGet(destUnit, flag)
 
     for i = 1, #auras do
         local aura = auras[i]
@@ -43,6 +42,11 @@ local function DataRecordIfNecessary(destUnit)
             end
         end
     end
+end
+
+local function DataRecordIfNecessary(destUnit)
+    AurasProcess(destUnit, "HELPFUL")
+    AurasProcess(destUnit, "HARMFUL")
 end
 
 function this.Initialize()
