@@ -36,6 +36,8 @@ function this.DataRecord(recorder, data)
     local recorderData = recordedData[recorder.key]
 
     if data ~= nil then
+        data = tostring(data)
+        
         if recorderData[data] == nil then
             recorderData[data] = {}
         end
