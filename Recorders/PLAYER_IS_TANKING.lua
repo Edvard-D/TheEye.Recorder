@@ -23,9 +23,6 @@ function this.Initialize()
         "Notify"
     )
     this.ListenerGroup:Activate()
-
-    DataRecord(this, false)
-    previousValue = false
 end
 
 function this:Notify(event, ...)
