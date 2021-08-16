@@ -3,6 +3,7 @@ local this = TheEye.Recorder.Recorders.PLAYER_IS_TANKING
 
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
 local NotifyBasedFunctionCallerSetup = TheEye.Core.UI.Elements.ListenerGroups.NotifyBasedFunctionCaller.Setup
+local previousValue
 
 
 function this.Initialize()
@@ -24,11 +25,15 @@ function this.Initialize()
     this.ListenerGroup:Activate()
 
     DataRecord(this, false)
+    previousValue = false
 end
 
 function this:Notify(event, ...)
     local threatSituation = select(1, ...)
     local isTanking = threatSituation >= 2
 
-    DataRecord(this, isTanking)
+    if isTanking ~= previousValue then
+        DataRecord(this, isTanking)
+        previousValue = isTanking
+    end
 end
