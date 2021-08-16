@@ -8,7 +8,7 @@ local UnitIsPlayer = UnitIsPlayer
 function this.IsAuraValidForRecord(sourceUnit, destUnit, sourceUnitCategory)
     local destUnitIsFriendlyPlayer = false
     if destUnit ~= nil then
-        destUnitIsFriendlyPlayer = UnitIsEnemy(destUnit) == false and UnitIsPlayer(destUnit) == true
+        destUnitIsFriendlyPlayer = UnitIsEnemy("player", destUnit) == false and UnitIsPlayer(destUnit) == true
     end
     
     return destUnit == "player"
