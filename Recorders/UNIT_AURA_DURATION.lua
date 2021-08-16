@@ -2,6 +2,7 @@ TheEye.Recorder.Recorders.UNIT_AURA_DURATION = {}
 local this = TheEye.Recorder.Recorders.UNIT_AURA_DURATION
 
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
+local DurationCalculateForDataKey = TheEye.Recorder.Managers.Recorders.DurationCalculateForDataKey
 local EventsRegister = TheEye.Core.Managers.Events.Register
 local GetTime = GetTime
 local IsAuraValidForRecord = TheEye.Recorder.Helpers.Auras.IsAuraValidForRecord
@@ -13,6 +14,8 @@ local previousAuras =
     player = {},
     target = {},
 }
+local recordUnits = { 1, 5, 30, 60, 300 } -- seconds
+local thresholds = { 10, 30, 120, 300 } -- seconds
 local UnitAurasGet = TheEye.Core.Helpers.Auras.UnitAurasGet
 local UnitCategoryGet = TheEye.Core.Helpers.Unit.UnitCategoryGet
 local updateRate = 1 -- second
@@ -34,7 +37,7 @@ local function DataRecordIfNecessary(destUnit)
 
         if expirationTime > 0 and IsAuraValidForRecord(sourceUnit, destUnit, sourceUnitCategory) == true then
             local spellID = aura[10]
-            local remainingDuration = math.ceil(expirationTime - GetTime())
+            local remainingDuration = DurationCalculateForDataKey(expirationTime - GetTime(), thresholds, recordUnits)
             local unitPreviousAuras = previousAuras[destUnit]
             local dataString = DataRecordFormatAsString(destUnit, spellID, remainingDuration, sourceUnitCategory)
 

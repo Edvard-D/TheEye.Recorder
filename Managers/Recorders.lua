@@ -45,3 +45,21 @@ function this.DataRecord(recorder, data)
         table.insert(recorderData, GetTime())
     end
 end
+
+local function RecordUnitGet(duration, thresholds, recordUnits)
+    for i = 1, #thresholds do
+        if duration <= thresholds[i] then
+            return recordUnits[i]
+        end
+    end
+
+    return recordUnits[#recordUnits]
+end
+
+-- Used to reduce the number of data keys when a time element is involved, as some durations can have very long.
+-- Example use cases include cooldowns, aura durations, time until death, etc. recordUnits should always have one
+-- more element than thresholds, as the last recordUnits value is treated as the default.
+function this.DurationCalculateForDataKey(duration, thresholds, recordUnits)
+    local recordUnit = RecordUnitGet(duration, thresholds, recordUnits)
+    return math.ceil(duration / recordUnit) * recordUnit
+end
