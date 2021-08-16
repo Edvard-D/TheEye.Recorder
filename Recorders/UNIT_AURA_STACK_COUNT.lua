@@ -14,12 +14,12 @@ local UnitAurasGet = TheEye.Core.Helpers.Auras.UnitAurasGet
 local UnitCategoryGet = TheEye.Core.Helpers.Unit.UnitCategoryGet
 
 
-local function DataRecordFormatAsString(unit, spellID, stackCount, sourceUnitCategory)
-    return unit .. "_" .. spellID .. "_" .. stackCount .. "_" .. sourceUnitCategory
+local function DataRecordFormatAsString(destUnit, spellID, stackCount, sourceUnitCategory)
+    return destUnit .. "_" .. spellID .. "_" .. stackCount .. "_" .. sourceUnitCategory
 end
 
-local function DataRecordIfNecessary(unit)
-    local auras = UnitAurasGet(unit, nil)
+local function DataRecordIfNecessary(destUnit)
+    local auras = UnitAurasGet(destUnit, nil)
     local currentAuras = {}
 
     for i = 1, #auras do
