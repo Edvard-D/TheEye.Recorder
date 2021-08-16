@@ -20,7 +20,7 @@ local function DataRecordFormatAsString(unit, spellID, isActive, sourceUnitCateg
 end
 
 local function DataRecordIfNecessary(destUnit)
-    local auras = UnitAurasGet(unit, nil)
+    local auras = UnitAurasGet(destUnit, nil)
     local currentAuras = {}
 
     for i = 1, #auras do
