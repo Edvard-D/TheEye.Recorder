@@ -2,6 +2,7 @@ TheEye.Recorder.Recorders.PLAYER_JUMPED = {}
 local this = TheEye.Recorder.Recorders.PLAYER_JUMPED
 
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
+local lastDataRecordTimestamp
 
 
 function this.Initialize()
@@ -9,5 +10,8 @@ function this.Initialize()
 end
 
 function this.OnPlayerJumped()
-    DataRecord(this, nil)
+    if GetTime() ~= lastDataRecordTimestamp then
+        DataRecord(this, nil)
+        lastDataRecordTimestamp = GetTime()
+    end
 end

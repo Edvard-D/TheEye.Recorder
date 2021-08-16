@@ -3,6 +3,7 @@ local this = TheEye.Recorder.Recorders.UNIT_COUNT_CLOSE_TO_TARGET
 
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
 local NotifyBasedFunctionCallerSetup = TheEye.Core.UI.Elements.ListenerGroups.NotifyBasedFunctionCaller.Setup
+local previousCounts = {}
 
 
 function this.Initialize()
@@ -38,5 +39,8 @@ function this:Notify(event, unitCount, inputGroup)
         hostility = "FRIENDLY"
     end
     
-    DataRecord(this, hostility .. "_" .. unitCount)
+    if previousCounts[hostility] ~= unitCount then
+        DataRecord(this, hostility .. "_" .. unitCount)
+        previousCounts[hostility] = unitCount
+    end
 end

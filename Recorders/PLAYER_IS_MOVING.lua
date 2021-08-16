@@ -2,6 +2,7 @@ TheEye.Recorder.Recorders.PLAYER_IS_MOVING = {}
 local this = TheEye.Recorder.Recorders.PLAYER_IS_MOVING
 
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
+local lastDataRecordTimestamp
 local NotifyBasedFunctionCallerSetup = TheEye.Core.UI.Elements.ListenerGroups.NotifyBasedFunctionCaller.Setup
 
 
@@ -27,5 +28,8 @@ function this.Initialize()
 end
 
 function this:Notify(event, isMoving)
-    DataRecord(this, isMoving)
+    if GetTime() ~= lastDataRecordTimestamp then
+        DataRecord(this, isMoving)
+        lastDataRecordTimestamp = GetTime()
+    end
 end
