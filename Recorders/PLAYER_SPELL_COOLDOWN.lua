@@ -36,9 +36,8 @@ local function ListenerGroupSetup(spellID)
         this,
         "Notify"
     )
-    listenerGroup:Activate()
-
     listenerGroups[spellID] = listenerGroup
+    listenerGroup:Activate()
 end
 
 function this:OnEvent(event, unit, _, spellID)
@@ -54,8 +53,13 @@ function this:Notify(event, cooldown, inputGroup)
     end
 
     local spellID = inputGroup.inputValues[1]
+    cooldown = DurationCalculateForDataKey(cooldown, thresholds, recordUnits)
     
-    if cooldown == 0 then
+    if previousCooldowns[spellID] == cooldown then
+        return
+    end
+
+    if cooldown == 0 and listenerGroups[spellID] ~= nil then
         listenerGroups[spellID]:Deactivate()
         listenerGroups[spellID] = nil
 
@@ -65,12 +69,8 @@ function this:Notify(event, cooldown, inputGroup)
             previousCooldowns[spellID] = 0
         end
     else
-        cooldown = DurationCalculateForDataKey(cooldown, thresholds, recordUnits)
         cooldownGreaterThanZeroFlags[spellID] = true
-
-        if previousCooldowns[spellID] ~= cooldown then
-            DataRecord(this, spellID .. "_" .. cooldown)
-            previousCooldowns[spellID] = cooldown
-        end
+        DataRecord(this, spellID .. "_" .. cooldown)
+        previousCooldowns[spellID] = cooldown
     end
 end
