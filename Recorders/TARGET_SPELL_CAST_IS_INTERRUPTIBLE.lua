@@ -6,10 +6,15 @@ local EventsRegister = TheEye.Core.Managers.Events.Register
 local previousValue
 local select = select
 local UnitCastingInfo = UnitCastingInfo
+local UnitGUID = UnitGUID
 
 
 function this.Initialize()
-    this.gameEvents = { "UNIT_SPELLCAST_START" }
+    this.gameEvents =
+    {
+        "PLAYER_TARGET_CHANGED",
+        "UNIT_SPELLCAST_START",
+    }
     EventsRegister(this)
 
     DataRecord(this, "nil")
@@ -17,14 +22,21 @@ function this.Initialize()
 end
 
 function this:OnEvent(event, ...)
-    unit, _, spellID = ...
+    if event == UNIT_SPELLCAST_START then
+        unit, _, spellID = ...
 
-    if unit == "target" then
-        local isInterruptible = select(8, UnitCastingInfo("target")) == false
+        if unit == "target" then
+            local isInterruptible = select(8, UnitCastingInfo("target")) == false
 
-        if isInterruptible ~= previousValue then
-            DataRecord(this, isInterruptible)
-            previousValue = isInterruptible
+            if isInterruptible ~= previousValue then
+                DataRecord(this, isInterruptible)
+                previousValue = isInterruptible
+            end
+        end
+    else -- PLAYER_TARGET_CHANGED
+        if UnitGUID("target") == nil and previousValue ~= "nil" then
+            DataRecord(this, "nil")
+            previousValue = "nil"
         end
     end
 end
