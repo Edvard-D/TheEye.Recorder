@@ -23,7 +23,7 @@ end
 
 function this:OnEvent(event, ...)
     if event == UNIT_SPELLCAST_START then
-        unit, _, spellID = ...
+        unit = select(1, ...)
 
         if unit == "target" then
             local isInterruptible = select(8, UnitCastingInfo("target")) == false
