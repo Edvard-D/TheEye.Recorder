@@ -1,5 +1,5 @@
-TheEye.Recorder.Recorders.PLAYER_SPELL_CAST_START = {}
-local this = TheEye.Recorder.Recorders.PLAYER_SPELL_CAST_START
+TheEye.Recorder.Recorders.PLAYER_SPELLCAST_START = {}
+local this = TheEye.Recorder.Recorders.PLAYER_SPELLCAST_START
 
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
 local EventsRegister = TheEye.Core.Managers.Events.Register

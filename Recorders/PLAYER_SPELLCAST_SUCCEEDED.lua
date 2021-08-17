@@ -1,5 +1,5 @@
-TheEye.Recorder.Recorders.PLAYER_SPELL_CAST_SUCCEEDED = {}
-local this = TheEye.Recorder.Recorders.PLAYER_SPELL_CAST_SUCCEEDED
+TheEye.Recorder.Recorders.PLAYER_SPELLCAST_SUCCEEDED = {}
+local this = TheEye.Recorder.Recorders.PLAYER_SPELLCAST_SUCCEEDED
 
 local DataRecord = TheEye.Recorder.Managers.Recorders.DataRecord
 local EventsRegister = TheEye.Core.Managers.Events.Register
