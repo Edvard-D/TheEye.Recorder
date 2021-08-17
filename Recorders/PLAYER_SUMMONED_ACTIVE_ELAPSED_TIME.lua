@@ -101,10 +101,12 @@ function this:Notify(event, _, inputGroup)
             lastDestGUID = eventData.destGUID
         end
     else -- UNIT_DESTROYED, UNIT_DIED, UNIT_DISSIPATES
-        DataRecordIfNecessary()
-
         local spellID = trackedGUIDToSpellIDs[eventData.destGUID]
-        trackedSpellIDToSummonedTimes[spellID] = nil
-        trackedGUIDToSpellIDs[eventData.destGUID] = nil
+        
+        if spellID ~= nil then
+            DataRecordIfNecessary()
+            trackedSpellIDToSummonedTimes[spellID] = nil
+            trackedGUIDToSpellIDs[eventData.destGUID] = nil
+        end
     end
 end
